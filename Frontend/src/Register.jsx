@@ -17,7 +17,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/send", form);
+      await axios.post("https://cloud-academy-6r2s.onrender.com/send", form);
       alert("🎉 Registration successful!");
       setForm({
         name: "",
