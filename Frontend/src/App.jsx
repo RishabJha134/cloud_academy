@@ -1,5 +1,4 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
 import Feature from "./assets/Feature";
 import Scroller from "./assets/Scroller";
 import Footer from "./assets/Footer";
@@ -15,27 +14,28 @@ function App() {
     <>
       <HeroSection />
 
-      <Routes>
-        {/* Home page — shows all homepage sections */}
-        <Route
-          path="/"
-          element={
-            <>
-              <div className="bg-gray-100">
-                <CardScroller />
-              </div>
-              <Feature />
-              <Scroller />
-            </>
-          }
-        />
+      <div className="bg-gray-100">
+        <CardScroller />
+      </div>
 
-        {/* Sub-pages — show only their own content */}
-        <Route path="/Register" element={<Register />} />
-        <Route path="/Contact" element={<Contact />} />
-        <Route path="/Courses" element={<Courses />} />
-        <Route path="/About" element={<About />} />
-      </Routes>
+      <Feature />
+      <Scroller />
+
+      <section id="courses">
+        <Courses />
+      </section>
+
+      <section id="about">
+        <About />
+      </section>
+
+      <section id="contact">
+        <Contact />
+      </section>
+
+      <section id="register">
+        <Register />
+      </section>
 
       <Footer />
     </>

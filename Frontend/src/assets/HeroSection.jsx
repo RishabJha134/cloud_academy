@@ -6,34 +6,50 @@ import video from "./video/video.mp4";
 import cloudacedmy from "./images/cloudacedmy.png";
 import { Dialog, DialogPanel } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import { Link } from "react-router-dom"; // ✅ LINK IMPORT
 
 const navigation = [
-  { name: "Home", href: "/" },
-  { name: "Courses", href: "/Courses" },
-  { name: "Contact", href: "/contact" },
-  { name: "About", href: "/About" },
+  { name: "Home", href: "#home" },
+  { name: "Courses", href: "#courses" },
+  { name: "Contact", href: "#contact" },
+  { name: "About", href: "#about" },
 ];
+
+// Smooth scroll handler
+const scrollToSection = (e, href) => {
+  e.preventDefault();
+  if (href === "#home") {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    return;
+  }
+  const element = document.querySelector(href);
+  if (element) {
+    element.scrollIntoView({ behavior: "smooth" });
+  }
+};
 
 export default function Example() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <div className="bg-white ">
+    <div id="home" className="bg-white ">
       {/* NAVBAR */}
       <nav
         aria-label="Global"
         className="flex items-center justify-between  lg:px-8 font-bold "
       >
         <div className="flex lg:flex-1 items-center">
-          <Link to="/" className="-m-1.5 p-1.5 flex items-center gap-2">
+          <a
+            href="#home"
+            onClick={(e) => scrollToSection(e, "#home")}
+            className="-m-1.5 p-1.5 flex items-center gap-2"
+          >
             <img
               alt="cloudacedmy"
               src={cloudacedmy}
               className="h-20 max-h-50 w-40"
               style={{ height: "90px" }}
             />
-          </Link>
+          </a>
         </div>
         <div className="flex lg:hidden">
           <button
@@ -49,21 +65,26 @@ export default function Example() {
         {/* Desktop Links */}
         <div className="hidden lg:flex lg:gap-x-14">
           {navigation.map((item) => (
-            <Link
+            <a
               key={item.name}
-              to={item.href}
-              className="text-sm font-extrabold text-blue-400"
+              href={item.href}
+              onClick={(e) => scrollToSection(e, item.href)}
+              className="text-sm font-extrabold text-blue-400 hover:text-blue-600 transition-colors"
             >
               {item.name}
-            </Link>
+            </a>
           ))}
         </div>
 
-        {/* Login Link */}
+        {/* Register Link */}
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <Link to="/Register" className="text-sm font-extrabold text-blue-400">
+          <a
+            href="#register"
+            onClick={(e) => scrollToSection(e, "#register")}
+            className="text-sm font-extrabold text-blue-400 hover:text-blue-600 transition-colors"
+          >
             Register <span aria-hidden="true">&rarr;</span>
-          </Link>
+          </a>
         </div>
       </nav>
 
@@ -77,13 +98,20 @@ export default function Example() {
           <div className="fixed inset-0 z-50" />
           <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
             <div className="flex items-center justify-between">
-              <Link to="/" className="-m-1.5 p-1.5">
+              <a
+                href="#home"
+                onClick={(e) => {
+                  scrollToSection(e, "#home");
+                  setMobileMenuOpen(false);
+                }}
+                className="-m-1.5 p-1.5"
+              >
                 <img
                   alt="cloudacedmy"
                   src={cloudacedmy}
                   className="h-8 w-auto"
                 />
-              </Link>
+              </a>
               <button
                 type="button"
                 onClick={() => setMobileMenuOpen(false)}
@@ -97,24 +125,30 @@ export default function Example() {
               <div className="-my-6 divide-y divide-gray-500/10">
                 <div className="space-y-2 py-6">
                   {navigation.map((item) => (
-                    <Link
+                    <a
                       key={item.name}
-                      to={item.href}
-                      onClick={() => setMobileMenuOpen(false)}
+                      href={item.href}
+                      onClick={(e) => {
+                        scrollToSection(e, item.href);
+                        setMobileMenuOpen(false);
+                      }}
                       className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
                     >
                       {item.name}
-                    </Link>
+                    </a>
                   ))}
                 </div>
                 <div className="py-6">
-                  <Link
-                    to="/login"
-                    onClick={() => setMobileMenuOpen(false)}
+                  <a
+                    href="#register"
+                    onClick={(e) => {
+                      scrollToSection(e, "#register");
+                      setMobileMenuOpen(false);
+                    }}
                     className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-bold text-gray-900 hover:bg-gray-50"
                   >
-                    Log in
-                  </Link>
+                    Register
+                  </a>
                 </div>
               </div>
             </div>
@@ -149,12 +183,13 @@ export default function Example() {
               {/* Optional Subtext here */}
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
-              <Link
-                to="/get-started"
+              <a
+                href="#register"
+                onClick={(e) => scrollToSection(e, "#register")}
                 className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white hover:bg-indigo-500"
               >
                 Get started
-              </Link>
+              </a>
             </div>
           </div>
         </div>
