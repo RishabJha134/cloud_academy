@@ -113,7 +113,7 @@ const Register = () => {
     setIsSubmitting(true);
 
     try {
-      await axios.post("https://cloud-academy-6r2s.onrender.com/send", form);
+      await axios.post("https://cloud-academy-xm9n.vercel.app/send", form);
       showToast("Registration successful! We'll get back to you soon.", "success");
       setForm({
         name: "",
